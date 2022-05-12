@@ -18,3 +18,7 @@
     height: 156px;
     margin-left: 800px;
 }
+
+.back-g-img {
+    background: url('./images/footer.png');
+}
