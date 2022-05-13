@@ -8,10 +8,10 @@ const AvailableAppointment = ({date, setDate}) => {
     const [treatment, setTreatment] = useState(null);
 
     useEffect(() => {
-        fetch('https://raw.githubusercontent.com/1234-56prova/data/main/slots.json')
+        fetch('http://localhost:5000/service')
         .then(res => res.json())
         .then(data => {setServices(data) 
-            setTreatment(data)})
+            })
     }, [])
     return (
         <div>

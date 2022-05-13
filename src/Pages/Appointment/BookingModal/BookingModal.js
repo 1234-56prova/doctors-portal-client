@@ -21,7 +21,8 @@ const BookModal = ({ date, treatment, setTreatment }) => {
                         <select name='slot' class="select select-bordered w-full max-w-xs">
                             <option disabled selected>Choose your slot</option>
                             {
-                                slots.map(slot => <option value={slot}>{slot}</option>)}
+                                slots.map(slot => <option value={slot}>{slot}</option>)
+                            }
                         </select>
                         <input type="text" placeholder="Your name" class="input input-ghost w-full max-w-xs" />
                         <input type="text" placeholder="Email Address" class="input input-ghost w-full max-w-xs" />
