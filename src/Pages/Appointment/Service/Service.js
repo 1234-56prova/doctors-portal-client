@@ -3,16 +3,16 @@ import React from 'react';
 const Service = ({ service, setTreatment }) => {
     const { name, slots } = service;
     return (
-        <div class="service  shadow-xl">
-            <div class=" margin-card">
-                <h2 style={{ color: '#19D3AE' }} class="card-title">{name}</h2>
+        <div className="service  shadow-xl">
+            <div className=" margin-card">
+                <h2 style={{ color: '#19D3AE' }} className="card-title">{name}</h2>
                 <p>{slots.length > 0 ? <span >{slots[0]}</span> : <span className='text-red-500'>No slots avaible</span>}</p>
                 <p>{slots.length} {slots.length > 0 ? 'spaces' : 'space'} avaible</p>
-                <div class="card-actions justify-end">
+                <div className="card-actions justify-end">
                     <label 
                     onClick={() => setTreatment(service)} 
                     disabled={slots.length === 0} 
-                    class="text-center btn modal-btn btn-sm button uppercase font-bold text-white" 
+                    className="text-center btn modal-btn btn-sm button uppercase font-bold text-white" 
                     for="booking-modal" 
                    >Book Appointment</label>
                 </div>
