@@ -6,6 +6,7 @@ import Registration from './Pages/Authentication/Registration/Registration'
 import Header from './Pages/Shared/Header/header'
 import Footer from './Pages/Shared/Footer/Footer';
 import Appointment from './Pages/Appointment/Appointment';
+import SignUp from './Pages/Authentication/SignUp/SignUp';
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/appointment' element={<Appointment></Appointment>}></Route>
         <Route path='/register' element={<Registration></Registration>}></Route>
+        <Route path='/signup' element={<SignUp></SignUp>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
