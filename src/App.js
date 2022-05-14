@@ -3,7 +3,7 @@ import './App.css';
 import Home from './Pages/Home/Home/home'
 import Login from './Pages/Authentication/Login/Login'
 import Registration from './Pages/Authentication/Registration/Registration'
-import Header from './Pages/Shared/Header/header'
+import Header from './Pages/Shared/Header/Header'
 import Footer from './Pages/Shared/Footer/Footer';
 import Appointment from './Pages/Appointment/Appointment';
 import SignUp from './Pages/Authentication/SignUp/SignUp';

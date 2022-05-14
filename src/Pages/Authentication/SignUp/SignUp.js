@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
@@ -12,18 +12,22 @@ const SignUp = () => {
         loading,
         error,
       ] = useCreateUserWithEmailAndPassword(auth);
+      const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const { register, formState: { errors }, handleSubmit } = useForm()
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const navigate = useNavigate();
-    const onSubmit = data => {
+    const onSubmit = async data => {
         console.log(data.email, data.password)
         createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({displayName: data.name})
         navigate('/');
+        console.log('update done')
     }
+
 
     let signInErrorMessage;
 
-    if (loading || gLoading) {
+    if (loading || gLoading || updating) {
         return <Loading></Loading>
     }
     if (gUser) {
@@ -31,7 +35,7 @@ const SignUp = () => {
         navigate('/');
     }
 
-    if ( error || gError) {
+    if ( error || gError || updateError) {
         signInErrorMessage = <p className='text-red-500'>{error?.message || gError?.message}</p>
     }
     return (
@@ -63,7 +67,7 @@ const SignUp = () => {
                                 message: 'Email is required'
                             },
                             pattern: {
-                                value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                 message: 'Provide a valid email'
                             },
                             minLength: {
