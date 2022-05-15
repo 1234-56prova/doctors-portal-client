@@ -1,12 +1,45 @@
 import React from 'react';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
 import format from 'date-fns/format';
+import {toast} from 'react-toastify' 
 const BookModal = ({ date, treatment, setTreatment }) => {
-    const { name, slots } = treatment;
-
+    const { _id, name, slots } = treatment;
+    const [user, loading, error] = useAuthState(auth);
     const handleBooking = event => {
         event.preventDefault()
+        const formatedDate = format(date, 'PP')
         const slot = event.target.slot.value;
-        setTreatment(null);
+        
+        const booking = {
+            treatmentId: _id,
+            treatment: name,
+            date: formatedDate,
+            slot: slot,
+            patient: user?.email,
+            patientName: user?.displayName,
+            phone: event.target.phone.value
+        }
+
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.success) {
+                toast(`appointment is set, ${formatedDate} at ${slot}`)
+            }
+            else {
+                toast.error('You already have an appointment that time')
+            }
+            setTreatment(null);
+        })
+
     }
     return (
         <div>
@@ -24,9 +57,9 @@ const BookModal = ({ date, treatment, setTreatment }) => {
                                 slots.map(slot => <option value={slot}>{slot}</option>)
                             }
                         </select>
-                        <input type="text" placeholder="Your name" className="input input-ghost w-full max-w-xs" />
-                        <input type="text" placeholder="Email Address" className="input input-ghost w-full max-w-xs" />
-                        <input type="text" placeholder="Phone Number" className="input input-ghost w-full max-w-xs" />
+                        <input type="text" required disabled value={user?.displayName || ''} placeholder="Your name" className="input input-ghost w-full max-w-xs" />
+                        <input type="text" required disabled value={user?.email || ''} placeholder="Email Address" className="input input-ghost w-full max-w-xs" />
+                        <input type="text" name='phone' required placeholder="Phone Number" className="input input-ghost w-full max-w-xs" />
                         <input type="submit" value="Submit" className="btn button" />
                     </form>
                 </div>
