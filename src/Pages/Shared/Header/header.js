@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
 
 const Header = () => {
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const logOut = () => {
         signOut(auth);
     }
@@ -29,7 +29,7 @@ const Header = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">Doctors Portal</a>
+                <a className="btn btn-ghost normal-case text-xl" href='/'>Doctors Portal</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
