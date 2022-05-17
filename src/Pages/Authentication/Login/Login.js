@@ -31,7 +31,7 @@ const Login = () => {
     if (token) {
         navigate(from, { replace: true});
     }
-    }, [token, form, navigate])
+    }, [token, from, navigate])
     let signInErrorMessage;
    
     if (loading || gLoading) {
