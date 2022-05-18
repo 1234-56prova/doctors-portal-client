@@ -12,35 +12,33 @@ const Login = () => {
         user,
         loading,
         error,
-      ] = useSignInWithEmailAndPassword(auth);
+    ] = useSignInWithEmailAndPassword(auth);
     const navigate = useNavigate();
     const location = useLocation();
     const { register, formState: { errors }, handleSubmit } = useForm()
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-    let from = location.state?.from?.pathname || '/'
     const onSubmit = data => {
-        console.log(data.email, data.password)
         signInWithEmailAndPassword(data.email, data.password);
-        navigate('/')
     }
 
-    const [token] = useToken(gUser || user)
+    const [token] = useToken(user || gUser)
+    let from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
-        
-    if (token) {
-        navigate(from, { replace: true});
-    }
-    }, [token, from, navigate])
+        if (gUser || user) {
+            navigate(from, { replace: true });
+        }
+    }, [token, from, navigate]
+    )
     let signInErrorMessage;
-   
+
     if (loading || gLoading) {
         return <Loading></Loading>
     }
 
-    
 
-    if ( error || gError) {
+
+    if (error || gError) {
         signInErrorMessage = <p className='text-red-500'>{error?.message || gError?.message}</p>
     }
     return (

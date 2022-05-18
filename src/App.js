@@ -13,6 +13,7 @@ import DashBoard from './Pages/DashBoard/DashBoard';
 import MyAppointments from './Pages/Appointment/MyAppointments/MyAppointments';
 import MyReviews from './Pages/Appointment/MyReviews/MyReviews';
 import MyHistory from './Pages/Appointment/MyHistory/MyHistory';
+import AllUsers from './Pages/DashBoard/AllUsers/AllUsers';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route index element={<MyAppointments></MyAppointments>}></Route>
           <Route path='review' element={<MyReviews></MyReviews>}></Route>
           <Route path='history' element={<MyHistory></MyHistory>}></Route>
+          <Route path='users' element={<AllUsers></AllUsers>}></Route>
         </Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
       </Routes>

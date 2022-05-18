@@ -11,6 +11,7 @@ const Header = () => {
         localStorage.removeItem('accessToken');
     }
 
+
     const menuItems = <>
         <li><Link className='text-decoration-none' to='/'>Home</Link></li>
         <li><Link className='text-decoration-none' to='/appointment'>Appointment</Link></li>
