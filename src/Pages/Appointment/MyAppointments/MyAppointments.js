@@ -23,8 +23,9 @@ const MyAppointments = () => {
                     signOut(auth)
                     localStorage.removeItem('accessToken')
                     navigate('/')
+                    
                   } 
-                  return res.json()
+                  return res.json();
                 })
                 .then(data => setAppointments(data));
         }
