@@ -27,8 +27,9 @@ function App() {
         <Route path='/dashboard' element={<RequireAuth><DashBoard></DashBoard></RequireAuth>}>
           <Route index element={<MyAppointments></MyAppointments>}></Route>
           <Route path='review' element={<MyReviews></MyReviews>}></Route>
-          <Route path='history' element={<MyHistory></MyHistory>}></Route>
           <Route path='users' element={<AllUsers></AllUsers>}></Route>
+          <Route path='history' element={<MyHistory></MyHistory>}></Route>
+          
         </Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
       </Routes>

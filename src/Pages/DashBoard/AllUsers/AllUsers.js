@@ -1,9 +1,16 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../Authentication/Loading/Loading';
+import UserRows from '../UserRows/UserRows';
 
 const AllUsers = () => {
-    const { data: users, isLoading } = useQuery('users', () => fetch('http://localhost:5000/user').then(res => res.json()));
+    const {data: users, isLoading} = useQuery('users', () => fetch('http://localhost:5000/user', {
+        method: 'GET',
+        headers: {
+            authorization :  `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then(res => res.json()))
+    
     if (isLoading) {
         return <Loading></Loading>
     }
@@ -12,31 +19,16 @@ const AllUsers = () => {
             <table class="table w-full">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>1</th>
-                        <td>Cy Ganderton</td>
-                        <td>Quality Control Specialist</td>
-                        <td>Blue</td>
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        <td>Hart Hagerty</td>
-                        <td>Desktop Support Technician</td>
-                        <td>Purple</td>
-                    </tr>
-                    <tr>
-                        <th>3</th>
-                        <td>Brice Swyre</td>
-                        <td>Tax Accountant</td>
-                        <td>Red</td>
-                    </tr>
+                    {
+                        users.map(user => <UserRows key={user._id} user={user}></UserRows>)
+                    }
                 </tbody>
             </table>
         </div>

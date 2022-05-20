@@ -17,11 +17,7 @@ const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm()
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const navigate = useNavigate();
-    const onSubmit = async data => {
-        createUserWithEmailAndPassword(data.email, data.password)
-        await updateProfile({displayName: data.name})
-        navigate('/');
-    }
+    
 
     const [token] = useToken(user || gUser);
     let signInErrorMessage;
@@ -36,6 +32,10 @@ const SignUp = () => {
 
     if ( error || gError || updateError) {
         signInErrorMessage = <p className='text-red-500'>{error?.message || gError?.message}</p>
+    }
+    const onSubmit = async data => {
+        createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({displayName: data.name})
     }
     return (
 

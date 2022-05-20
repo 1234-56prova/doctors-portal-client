@@ -17,16 +17,15 @@ const Login = () => {
     const location = useLocation();
     const { register, formState: { errors }, handleSubmit } = useForm()
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [token] = useToken(user || gUser);
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password);
     }
 
-    const [token] = useToken(user || gUser)
     let from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
-        if (gUser || user) {
-            navigate(from, { replace: true });
+        if (token) {
             return;
         }
     }, [token, from, navigate]

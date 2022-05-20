@@ -1,4 +1,3 @@
-import { da } from 'date-fns/locale';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +21,7 @@ const MyAppointments = () => {
                   if (res.status === 401 || res.status === 403) {
                     signOut(auth)
                     localStorage.removeItem('accessToken')
-                    navigate('/')
+                    navigate('/');
                     
                   } 
                   return res.json();
@@ -31,7 +30,7 @@ const MyAppointments = () => {
         }
     }, [user])
     
-    const accessTo = localStorage.getItem('accessToken')
+    const accessTo = localStorage.getItem('accessToken');
     console.log(accessTo);
     return (
         <div>
@@ -62,4 +61,4 @@ const MyAppointments = () => {
     );
 };
 
-export default MyAppointments;
+            export default MyAppointments;
