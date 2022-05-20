@@ -3,7 +3,6 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
-import useToken from '../../../hooks/useToken';
 import Loading from '../Loading/Loading';
 
 const SignUp = () => {
@@ -19,13 +18,12 @@ const SignUp = () => {
     const navigate = useNavigate();
     
 
-    const [token] = useToken(user || gUser);
     let signInErrorMessage;
 
     if (loading || gLoading || updating) {
         return <Loading></Loading>
     }
-    if (token) {
+    if (gUser || user) {
         console.log(user);
         navigate('/appointment');
     }
@@ -58,25 +56,6 @@ const SignUp = () => {
                          <label className='label'>
                             {errors?.name?.type === 'required' && <span className='label-text-alt text-red-500'>{errors?.name?.message}</span>}
                             {errors?.name?.type === 'pattern' && <span className='label-text-alt text-red-500'>{errors?.name?.message}</span>}
-                        </label>
-                        <label htmlFor="">Email</label>
-                        <input className=' mb-2 input input-bordered w-full max-w-xs' type='email' {...register('email', {
-                            required: {
-                                value: true,
-                                message: 'Email is required'
-                            },
-                            pattern: {
-                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                message: 'Provide a valid email'
-                            },
-                            minLength: {
-                                value: 6,
-                                message: 'Must be 6 characters or longer'
-                            }
-                        })} />
-                        <label className='label'>
-                            {errors?.email?.type === 'required' && <span className='label-text-alt text-red-500'>{errors?.email.message}</span>}
-                            {errors?.email?.type === 'pattern' && <span className='label-text-alt text-red-500'>{errors?.email.message}</span>}
                         </label>
                         <label for="">Password</label>
                         <input className='input input-bordered w-full max-w-xs' type='password' {...register("password", {

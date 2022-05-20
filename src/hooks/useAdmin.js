@@ -12,20 +12,15 @@ const useAdmin = user => {
             method: 'PUT',
             headers: {
                 'content-type': "application/json",
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(currentUser)
         })
             .then(res => res.json())
             .then(data => {
-                console.log('data inside useToken', data);
-                const accessToken = data.token;
-                localStorage.setItem('accessToken', accessToken)
-                setAdmin(accessToken);
-                
+                setAdmin(data)
             })
         }
-    }, [user]);
+    });
     return [admin];
 }
 
