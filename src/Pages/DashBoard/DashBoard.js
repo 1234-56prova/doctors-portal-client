@@ -17,6 +17,7 @@ const DashBoard = () => {
           <li><Link to='/dashboard/history'>My History</Link></li>
           <li><Link to='/dashboard/users'>All Users</Link></li>
           <li><Link to='/dashboard/addDoctor'>Doctor</Link></li>
+          <li><Link to='/dashboard/manageDoctor'>Manage Doctors</Link></li>
         </ul>
       </div>
     </div>

@@ -15,6 +15,7 @@ import MyReviews from './Pages/Appointment/MyReviews/MyReviews';
 import MyHistory from './Pages/Appointment/MyHistory/MyHistory';
 import AllUsers from './Pages/DashBoard/AllUsers/AllUsers';
 import AddDoctor from './Pages/DashBoard/AddDoctor/AddDoctor';
+import ManageDoctors from './Pages/DashBoard/ManageDoctors';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path='users' element={<AllUsers></AllUsers>}></Route>
           <Route path='addDoctor' element={<AddDoctor></AddDoctor>}></Route>
           <Route path='history' element={<MyHistory></MyHistory>}></Route>
+          <Route path='manageDoctor' element={<ManageDoctors></ManageDoctors>}></Route>
           
         </Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
