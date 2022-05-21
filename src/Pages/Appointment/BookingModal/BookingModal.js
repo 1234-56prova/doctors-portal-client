@@ -18,7 +18,8 @@ const BookModal = ({ date, treatment, setTreatment, refetch }) => {
             slot: slot,
             patient: user?.email,
             patientName: user?.displayName || user?.name,
-            phone: event.target.phone.value
+            phone: event.target.phone.value,
+            amountPaid: event.target.paidAmount.value
         }
 
         fetch('http://localhost:5000/booking', {
@@ -61,6 +62,7 @@ const BookModal = ({ date, treatment, setTreatment, refetch }) => {
                         <input type="text" required disabled value={user?.displayName || ''} placeholder="Your name" className="input input-ghost w-full max-w-xs" />
                         <input type="text" required disabled value={user?.email || ''} placeholder="Email Address" className="input input-ghost w-full max-w-xs" />
                         <input type="text" name='phone' required placeholder="Phone Number" className="input input-ghost w-full max-w-xs" />
+                        <input type="text" name='paidAmount' required placeholder="Amount paid" className="input input-ghost w-full max-w-xs" />
                         <input type="submit" value="Submit" className="btn button" />
                     </form>
                 </div>
